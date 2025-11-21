@@ -3,3 +3,7 @@
 .vs/
 
 AnchorPointWebSolutionsLandingPage.Server/obj/
+AnchorPointWebSolutionsLandingPage.Server/bin/
+
+anchorpointwebsolutionslandingpage.client/obj/
+anchorpointwebsolutionslandingpage.client/bin/
