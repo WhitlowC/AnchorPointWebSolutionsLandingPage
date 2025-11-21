@@ -22,7 +22,8 @@ import ServiceDetailTechnologies from '../../components/service-detail/ServiceDe
 import ServiceDetailCaseStudies from '../../components/service-detail/ServiceDetailCaseStudies.vue'
 import ServiceDetailBenefits from '../../components/service-detail/ServiceDetailBenefits.vue'
 import ServiceDetailCTA from '../../components/service-detail/ServiceDetailCTA.vue'
-import type { CaseStudy } from '../../types/serviceDetail'
+import type { CaseStudy, Technology } from '../../types/serviceDetail'
+import { serviceDetailsData } from '../../data/serviceDetails'
 
 interface Example {
     title: string
@@ -33,21 +34,24 @@ interface Example {
     preview?: string
 }
 
+// Get service data from centralized data source
+const baseServiceData = serviceDetailsData['web-development']
+
 const serviceData: {
     title: string
     icon: string
     tagline: string
     description: string
     features: string[]
-    technologies: string[]
+    technologies: Technology[]
     caseStudies: CaseStudy[]
     benefits: string[]
     examples: Example[]
 } = {
-    title: 'Web Development',
-    icon: '🚀',
-    tagline: 'Building modern, scalable web applications that drive business growth',
-    description: 'Our web development services combine cutting-edge technologies with proven methodologies to create powerful, user-friendly websites and web applications. From simple landing pages to complex enterprise solutions, we deliver digital experiences that engage users and achieve business objectives.',
+    title: baseServiceData.title,
+    icon: baseServiceData.icon,
+    tagline: baseServiceData.tagline,
+    description: baseServiceData.description,
     features: [
         'Component-Based Architecture',
         'Real-Time Data Integration',
@@ -56,16 +60,7 @@ const serviceData: {
         'Responsive Cross-Device Design',
         'Performance Optimization'
     ],
-    technologies: [
-        'Vue.js',
-        'React',
-        'TypeScript',
-        'Node.js',
-        'ASP.NET Core',
-        'HTML5/CSS3',
-        'Tailwind CSS',
-        'Webpack/Vite'
-    ],
+    technologies: baseServiceData.technologies as Technology[],
     caseStudies: [
         {
             title: 'Enterprise Dashboard Transformation',
