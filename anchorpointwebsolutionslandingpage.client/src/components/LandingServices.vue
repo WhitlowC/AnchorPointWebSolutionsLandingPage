@@ -27,13 +27,8 @@ const services = ref<Service[]>([
         icon: '☁️'
     },
     {
-        title: 'API Development',
-        description: 'Robust APIs for seamless system integration',
-        icon: '🔌'
-    },
-    {
-        title: 'DBA/Data Warehousing',
-        description: 'Expert database administration and data warehousing management',
+        title: 'Data Warehousing',
+        description: 'Enterprise data warehousing solutions and analytics infrastructure',
         icon: '🗄️'
     },
     {
