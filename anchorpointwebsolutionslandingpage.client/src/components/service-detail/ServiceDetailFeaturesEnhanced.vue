@@ -3,14 +3,18 @@ import { ref, nextTick, watch, onMounted, onUnmounted } from 'vue'
 import ApiDemo from '../demos/ApiDemo.vue'
 import SpaDemo from '../demos/SpaDemo.vue'
 import DashboardDemo from '../demos/DashboardDemo.vue'
+import PhoneDemo from '../demos/PhoneDemo.vue'
+import TabletDemo from '../demos/TabletDemo.vue'
 import SpaCodeExample from '../demos/code-examples/SpaCodeExample.vue'
 import ApiCodeExample from '../demos/code-examples/ApiCodeExample.vue'
 import DashboardCodeExample from '../demos/code-examples/DashboardCodeExample.vue'
+import PhoneCodeExample from '../demos/code-examples/PhoneCodeExample.vue'
+import TabletCodeExample from '../demos/code-examples/TabletCodeExample.vue'
 
 interface Example {
     title: string
     description: string
-    type: 'code' | 'ui' | 'demo' | 'api-demo' | 'spa-demo' | 'dashboard-demo'
+    type: 'code' | 'ui' | 'demo' | 'api-demo' | 'spa-demo' | 'dashboard-demo' | 'phone-demo' | 'tablet-demo'
     content: string
     language?: string
     preview?: string
@@ -40,7 +44,6 @@ function matchHeights() {
 
     if (previewEl && codeEl) {
         const previewHeight = previewEl.offsetHeight
-        console.log('Preview height:', previewHeight, 'Setting code height to:', previewHeight)
         codeEl.style.height = `${previewHeight}px`
         codeEl.style.maxHeight = `${previewHeight}px`
     }
@@ -233,6 +236,56 @@ onUnmounted(() => {
                                     </div>
                                     <div class="preview-content">
                                         <DashboardDemo />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phone Demo (Code + Interactive Component) -->
+                        <div v-else-if="example.type === 'phone-demo'" class="demo-container phone-demo-container">
+                            <div class="demo-split phone-demo-split">
+                                <!-- Code Side -->
+                                <div class="demo-code" :ref="el => el && (codeRefs[index] = el as HTMLElement)">
+                                    <PhoneCodeExample />
+                                </div>
+
+                                <!-- Interactive Phone Demo -->
+                                <div class="demo-preview" :ref="el => el && (previewRefs[index] = el as HTMLElement)">
+                                    <div class="preview-header">
+                                        <span class="preview-label">Live Preview</span>
+                                        <div class="code-dots">
+                                            <span class="dot red"></span>
+                                            <span class="dot yellow"></span>
+                                            <span class="dot green"></span>
+                                        </div>
+                                    </div>
+                                    <div class="preview-content">
+                                        <PhoneDemo />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tablet Demo (Code + Interactive Component) -->
+                        <div v-else-if="example.type === 'tablet-demo'" class="demo-container tablet-demo-container">
+                            <div class="demo-split tablet-demo-split">
+                                <!-- Code Side -->
+                                <div class="demo-code" :ref="el => el && (codeRefs[index] = el as HTMLElement)">
+                                    <TabletCodeExample />
+                                </div>
+
+                                <!-- Interactive Tablet Demo -->
+                                <div class="demo-preview" :ref="el => el && (previewRefs[index] = el as HTMLElement)">
+                                    <div class="preview-header">
+                                        <span class="preview-label">Live Preview</span>
+                                        <div class="code-dots">
+                                            <span class="dot red"></span>
+                                            <span class="dot yellow"></span>
+                                            <span class="dot green"></span>
+                                        </div>
+                                    </div>
+                                    <div class="preview-content">
+                                        <TabletDemo />
                                     </div>
                                 </div>
                             </div>
@@ -490,6 +543,21 @@ onUnmounted(() => {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
+/* Phone Demo Specific Styles */
+.phone-demo-split {
+    grid-template-columns: 1.5fr 1fr;
+}
+
+/* Tablet Demo Specific Styles */
+.tablet-demo-split {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.tablet-demo-container .demo-preview {
+    position: static;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -527,7 +595,9 @@ onUnmounted(() => {
         font-size: 0.8rem;
     }
 
-    .demo-split {
+    .demo-split,
+    .phone-demo-split,
+    .tablet-demo-split {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
