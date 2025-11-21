@@ -3,7 +3,11 @@
 .vs/
 
 AnchorPointWebSolutionsLandingPage.Server/obj/
+AnchorPointWebSolutionsLandingPage.Server/bin/
 
 AnchorPointWebSolutionsLandingPage.Server/bin/Debug/net8.0/AnchorPointWebSolutionsLandingPage.Server.dll
 
 AnchorPointWebSolutionsLandingPage.Server/bin/Debug/net8.0/AnchorPointWebSolutionsLandingPage.Server.exe
+
+anchorpointwebsolutionslandingpage.client/obj/
+anchorpointwebsolutionslandingpage.client/bin/
