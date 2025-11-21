@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:56684",
+"RedirectUrl": "",
+"LaunchCommand": "npm run dev",
+"WorkingDirectory": "C:\\Users\\whitl\\source\\repos\\AnchorPointWebSolutionsLandingPage\\AnchorPointWebSolutionsLandingPage.Server\\..\\anchorpointwebsolutionslandingpage.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}
