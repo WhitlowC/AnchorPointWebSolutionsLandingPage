@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../views/HomePage.vue'
 import ServiceDetailPage from '../views/ServiceDetailPage.vue'
 import WebDevelopmentService from '../views/services/WebDevelopmentService.vue'
+import ExcelOptimizationService from '../views/services/ExcelOptimizationService.vue'
+import MobileSolutionsService from '../views/services/MobileSolutionsService.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +17,16 @@ const router = createRouter({
       path: '/services/web-development',
       name: 'web-development',
       component: WebDevelopmentService
+    },
+    {
+      path: '/services/excel-optimization',
+      name: 'excel-optimization',
+      component: ExcelOptimizationService
+    },
+    {
+      path: '/services/mobile-solutions',
+      name: 'mobile-solutions',
+      component: MobileSolutionsService
     },
     {
       path: '/services/:serviceId',

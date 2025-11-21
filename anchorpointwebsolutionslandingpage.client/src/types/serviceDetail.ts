@@ -1,3 +1,10 @@
+export interface Technology {
+  name: string
+  category: string
+  description?: string
+  icon?: string
+}
+
 export interface ServiceDetail {
   id: string
   title: string
@@ -5,7 +12,7 @@ export interface ServiceDetail {
   tagline: string
   description: string
   features: string[]
-  technologies: string[]
+  technologies: string[] | Technology[]
   caseStudies: CaseStudy[]
   benefits: string[]
 }
