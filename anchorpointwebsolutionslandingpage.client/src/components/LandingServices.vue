@@ -22,29 +22,9 @@ const services = ref<Service[]>([
         icon: '🛒'
     },
     {
-        title: 'Cloud Services',
-        description: 'Reliable cloud hosting and infrastructure management',
-        icon: '☁️'
-    },
-    {
-        title: 'Data Warehousing',
-        description: 'Enterprise data warehousing solutions and analytics infrastructure',
-        icon: '🗄️'
-    },
-    {
         title: 'Excel Optimization',
         description: 'Data cleanup, advanced querying, and Excel workflow optimization',
         icon: '📊'
-    },
-    {
-        title: 'Mobile Solutions',
-        description: 'Responsive designs that work beautifully on any device',
-        icon: '📱'
-    },
-    {
-        title: 'Consulting',
-        description: 'Strategic guidance for your digital transformation',
-        icon: '💡'
     }
 ])
 
@@ -100,10 +80,10 @@ const navigateToService = (serviceTitle: string) => {
 }
 
 .services-grid {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
 }
 
@@ -153,6 +133,12 @@ const navigateToService = (serviceTitle: string) => {
 
 .service-card:hover .learn-more {
     opacity: 1;
+}
+
+@media (max-width: 1200px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
