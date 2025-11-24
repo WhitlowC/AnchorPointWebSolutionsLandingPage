@@ -56,12 +56,6 @@ export const serviceDetailsData: Record<string, ServiceDetail> = {
         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg'
       },
       {
-        name: 'Next.js',
-        category: 'Frontend',
-        description: 'React framework for production-ready applications',
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg'
-      },
-      {
         name: 'Node.js',
         category: 'Backend',
         description: 'JavaScript runtime for building scalable server applications',
@@ -108,12 +102,6 @@ export const serviceDetailsData: Record<string, ServiceDetail> = {
         category: 'Database',
         description: 'Flexible NoSQL database for modern applications',
         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg'
-      },
-      {
-        name: 'Redis',
-        category: 'Database',
-        description: 'In-memory data store for caching and real-time operations',
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg'
       },
       {
         name: 'MySQL',

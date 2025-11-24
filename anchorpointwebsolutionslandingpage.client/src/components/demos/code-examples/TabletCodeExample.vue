@@ -1,7 +1,7 @@
 <template>
     <div class="code-example">
         <div class="code-header">
-            <span class="code-language">React Native / Swift</span>
+            <span class="code-language">Vue 3 / TypeScript</span>
             <div class="code-dots">
                 <span class="dot red"></span>
                 <span class="dot yellow"></span>
@@ -15,238 +15,226 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const codeContent = ref(`// EnterpriseDashboard.tsx - Tablet Dashboard
-import React, { useState } from 'react';
-import {
-  View, Text, TouchableOpacity,
-  StyleSheet, ScrollView
-} from 'react-native';
+const codeContent = ref(`<!-- EnterpriseDashboard.vue - Tablet Dashboard -->
+<script setup lang="ts">
+import { ref } from 'vue'
 
-// Main Dashboard Component
-const DashboardScreen = () => {
-  const [activeView, setActiveView] = useState('dashboard');
+interface Metric {
+  icon: string
+  label: string
+  value: string
+  change: string
+}
 
-  const metrics = [
-    { icon: '💰', label: 'Revenue', 
-      value: '$54,239', change: '+12.5%' },
-    { icon: '👥', label: 'Customers', 
-      value: '1,429', change: '+8.2%' },
-    { icon: '📦', label: 'Orders', 
-      value: '342', change: '-3.1%' },
-    { icon: '⭐', label: 'Rating', 
-      value: '4.8/5', change: '+0.3' }
-  ];
+const activeView = ref('dashboard')
 
-  return (
-    <View style={styles.container}>
-      {/* Sidebar Navigation */}
-      <View style={styles.sidebar}>
-        <View style={styles.sidebarHeader}>
-          <Text style={styles.companyLogo}>🏢</Text>
-          <Text style={styles.companyName}>TechCorp</Text>
-        </View>
-        
-        <NavButton 
-          icon="📊" 
-          label="Dashboard" 
-          active={activeView === 'dashboard'}
-          onPress={() => setActiveView('dashboard')}
-        />
-        <NavButton 
-          icon="📈" 
-          label="Analytics"
-          active={activeView === 'analytics'}
-          onPress={() => setActiveView('analytics')}
-        />
-        <NavButton 
-          icon="👥" 
-          label="Team"
-          active={activeView === 'team'}
-          onPress={() => setActiveView('team')}
-        />
-      </View>
+const metrics = ref<Metric[]>([
+  { icon: '💰', label: 'Revenue', 
+    value: '$54,239', change: '+12.5%' },
+  { icon: '👥', label: 'Customers', 
+    value: '1,429', change: '+8.2%' },
+  { icon: '📦', label: 'Orders', 
+    value: '342', change: '-3.1%' },
+  { icon: '⭐', label: 'Rating', 
+    value: '4.8/5', change: '+0.3' }
+])
 
-      {/* Content Area */}
-      <ScrollView style={styles.content}>
-        <Text style={styles.title}>
-          Dashboard Overview
-        </Text>
+const chartData = ref([65, 78, 45, 89, 72, 95])
 
-        {/* Metrics Grid */}
-        <View style={styles.metricsGrid}>
-          {metrics.map((metric) => (
-            <MetricCard key={metric.label} {...metric} />
-          ))}
-        </View>
+const setActiveView = (view: string) => {
+  activeView.value = view
+}
 
-        {/* Charts Section */}
-        <View style={styles.chartsSection}>
-          <ChartCard 
-            title="Sales Performance" 
-            data={[65, 78, 45, 89, 72, 95]}
-          />
-          <RevenueChart total="$2.4M" />
-        </View>
-      </ScrollView>
-    </View>
-  );
-};
+const isChangePositive = (change: string) => {
+  return change.startsWith('+')
+}
+</script>
 
-// Metric Card Component
-const MetricCard = ({ icon, label, value, change }) => (
-  <View style={styles.metricCard}>
-    <Text style={styles.metricIcon}>{icon}</Text>
-    <View>
-      <Text style={styles.metricValue}>{value}</Text>
-      <Text style={styles.metricLabel}>{label}</Text>
-      <Text style={[
-        styles.metricChange,
-        change.startsWith('+') 
-          ? styles.positive 
-          : styles.negative
-      ]}>
-        {change}
-      </Text>
-    </View>
-  </View>
-);
+<template>
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="company-logo">🏢</span>
+        <h1 class="company-name">TechCorp</h1>
+      </div>
 
-// Chart Card with Bar Chart
-const ChartCard = ({ title, data }) => (
-  <View style={styles.chartCard}>
-    <Text style={styles.chartTitle}>{title}</Text>
-    <View style={styles.chartBars}>
-      {data.map((value, index) => (
-        <View 
-          key={index}
-          style={[
-            styles.chartBar, 
-            { height: \`\${value}%\` }
-          ]}
-        />
-      ))}
-    </View>
-  </View>
-);
+      <button class="nav-button" :class="{ active: activeView === 'dashboard' }" @click="setActiveView('dashboard')">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Dashboard</span>
+      </button>
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#f9fafb',
-  },
-  sidebar: {
-    width: 200,
-    backgroundColor: '#fff',
-    borderRightWidth: 1,
-    borderRightColor: '#e5e7eb',
-  },
-  content: {
-    flex: 1,
-    padding: 24,
-  },
-  metricsGrid: {
-    flexDirection: 'row',
-    gap: 16,
-    marginBottom: 24,
-  },
-  metricCard: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    padding: 20,
-    borderRadius: 12,
-    gap: 16,
-  },
-  chartsSection: {
-    flexDirection: 'row',
-    gap: 16,
-  },
-  chartCard: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 24,
-    borderRadius: 12,
-  },
-});
+      <button class="nav-button" :class="{ active: activeView === 'analytics' }" @click="setActiveView('analytics')">
+        <span class="nav-icon">📈</span>
+        <span class="nav-label">Analytics</span>
+      </button>
 
-export default DashboardScreen;`)
+      <button class="nav-button" :class="{ active: activeView === 'team' }" @click="setActiveView('team')">
+        <span class="nav-icon">👥</span>
+        <span class="nav-label">Team</span>
+      </button>
+    </aside>
+
+    <!-- Content Area -->
+    <main class="content">
+      <h2 class="title">Dashboard Overview</h2>
+
+      <!-- Metrics Grid -->
+      <div class="metrics-grid">
+        <div v-for="metric in metrics" :key="metric.label" class="metric-card">
+          <span class="metric-icon">{{ metric.icon }}</span>
+          <div class="metric-info">
+            <div class="metric-value">{{ metric.value }}</div>
+            <div class="metric-label">{{ metric.label }}</div>
+            <div class="metric-change" :class="isChangePositive(metric.change)
+              ? 'positive'
+              : 'negative'">
+              {{ metric.change }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="charts-section">
+        <div class="chart-card">
+          <h3 class="chart-title">Sales Performance</h3>
+          <div class="chart-bars">
+            <div v-for="(value, index) in chartData" :key="index" class="chart-bar" :style="{ height: value + '%' }" />
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3 class="chart-title">Revenue</h3>
+          <div class="revenue-total">$2.4M</div>
+        </div>
+      </div>
+    </main>
+  </div>
+</template>
+
+<style scoped>
+.dashboard-container {
+  display: flex;
+  height: 100%;
+  background: #f9fafb;
+}
+
+.sidebar {
+  width: 200px;
+  background: #fff;
+  border-right: 1px solid #e5e7eb;
+}
+
+.content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.metrics-grid {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.metric-card {
+  flex: 1;
+  display: flex;
+  gap: 16px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.charts-section {
+  display: flex;
+  gap: 16px;
+}
+
+.chart-card {
+  flex: 1;
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+}
+</style>`)
 </script>
 
 <style scoped>
 .code-example {
-    background: #1e1e1e;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    border: 1px solid #2d2d2d;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid #2d2d2d;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .code-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    background: #2d2d2d;
-    border-bottom: 1px solid #3d3d3d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: #2d2d2d;
+  border-bottom: 1px solid #3d3d3d;
 }
 
 .code-language {
-    font-size: 0.875rem;
-    color: #a0a0a0;
-    font-weight: 500;
+  font-size: 0.875rem;
+  color: #a0a0a0;
+  font-weight: 500;
 }
 
 .code-dots {
-    display: flex;
-    gap: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
 }
 
 .dot.red {
-    background: #ef4444;
+  background: #ef4444;
 }
 
 .dot.yellow {
-    background: #f59e0b;
+  background: #f59e0b;
 }
 
 .dot.green {
-    background: #10b981;
+  background: #10b981;
 }
 
 .code-content {
-    flex: 1;
-    margin: 0;
-    padding: 1.5rem;
-    overflow: auto;
-    overflow-x: auto;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: #d4d4d4;
-    background: #1e1e1e;
+  flex: 1;
+  margin: 0;
+  padding: 1.5rem;
+  overflow: auto;
+  overflow-x: auto;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #d4d4d4;
+  background: #1e1e1e;
 }
 
 .code-content code {
-    color: #d4d4d4;
-    display: block;
-    white-space: pre;
-    min-width: max-content;
+  color: #d4d4d4;
+  display: block;
+  white-space: pre;
+  min-width: max-content;
 }
 
 @media (max-width: 768px) {
-    .code-content {
-        font-size: 0.75rem;
-        padding: 1rem;
-    }
+  .code-content {
+    font-size: 0.75rem;
+    padding: 1rem;
+  }
 }
 </style>
